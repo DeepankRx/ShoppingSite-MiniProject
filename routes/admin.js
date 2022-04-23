@@ -15,7 +15,7 @@ router.post("/add-product", (req, res, next) => {
 
 
 router.get("/add-product", (req, res, next) => {
-  res.status(200).render("add-product");
+  res.status(200).render("add-product",{pageTitle:"Add Product",path: "/admin/add-product"});
 });
 
 exports.routes = router;
