@@ -10,7 +10,7 @@ router.post("/product", (req, res, next) => {
 
 router.get("/add-product", (req, res, next) => {
   res.status(200).send(
-    "<form action='/product' method='POST'><input type='text' name='title' placeholder='Enter the product'></input><button type='submit'>Submit    </button></form>"
+    "<form action='/admin/product' method='POST'><input type='text' name='title' placeholder='Enter the product'></input><button type='submit'>Submit    </button></form>"
   );
 });
 
