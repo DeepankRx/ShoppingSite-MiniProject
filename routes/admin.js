@@ -15,7 +15,7 @@ router.post("/add-product", (req, res, next) => {
 
 
 router.get("/add-product", (req, res, next) => {
-  res.status(200).sendFile(path.join(rootDir , "views", "add-product.html"));
+  res.status(200).render("add-product");
 });
 
 exports.routes = router;
