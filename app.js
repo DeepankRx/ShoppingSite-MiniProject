@@ -7,7 +7,7 @@ const errorController = require('./controllers/error');
 
 const app = express();
 
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 const adminRoutes = require('./routes/admin');
@@ -20,7 +20,7 @@ app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
 app.use(errorController.get404);
- 
+
 app.listen(3000,()=>{
-    console.log('Server is up on port 3000'); 
+    console.log('Server started on port 3000');
 });
