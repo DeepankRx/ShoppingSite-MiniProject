@@ -15,6 +15,7 @@ app.set('views', 'views');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const authRoutes = require('./routes/auth');
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -30,11 +31,11 @@ app.use((req, res, next) => {
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(authRoutes);
+
 app.use(errorController.get404);
 
 mongoose
   .connect(
-
     'mongodb://localhost:27017/ecommerce', { useNewUrlParser: true,useUnifiedTopology: true }
   )
   .then(result => {
@@ -50,9 +51,10 @@ mongoose
         user.save();
       }
     });
-    app.listen(3000,()=>{
+    app.listen(3000, () => {
       console.log('Server started on port 3000');
-    });
+    }
+  ).catch(err => console.log(err));
   })
   .catch(err => {
     console.log(err);
