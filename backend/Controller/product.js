@@ -24,11 +24,22 @@ exports.postAddProduct = async (req, res, next) => {
     });
 };
 
-// exports.postAddProduct = (req, res, next) => {
-//   const product = new Product(req.body.title);
-//   product.save();
-//   res.redirect("/");
-// };
+exports.getASingleProduct = (req, res, next) => {
+  const prodId = req.params.productId;
+  Product.findById(prodId)
+    .then((product) => {
+      if (product) {
+        res.status(200).json(product);
+      } else {
+        res.status(404).json({
+          message: "Product not found!",
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 exports.getProducts = (req, res, next) => {
   Product.find()
