@@ -30,10 +30,12 @@ exports.postAddProduct = async (req, res, next) => {
 //   res.redirect("/");
 // };
 
-// exports.getProducts = (req, res, next) => {
-//     Product.find().then((products) => {
-//         res.json(JSON.parse(products));
-//     }).catch((err) => {
-//         res.json(err);
-//     });
-// };
+exports.getProducts = (req, res, next) => {
+  Product.find()
+    .then((products) => {
+      res.json(products);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+};
