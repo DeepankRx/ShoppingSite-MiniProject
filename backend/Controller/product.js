@@ -1,30 +1,39 @@
-const Product = require('../models/product');
+const Product = require("../Model/product");
 
-exports.getAddProduct = (req, res, next) => {
-  res.render('add-product', {
-    pageTitle: 'Add Product',
-    path: '/admin/add-product',
-    formsCSS: true,
-    productCSS: true,
-    activeAddProduct: true
+exports.postAddProduct = async (req, res, next) => {
+  const title = req.body.title;
+  const imageUrl = req.body.imageUrl;
+  const price = req.body.price;
+  const description = req.body.description;
+  console.log(req.body);
+  const product = new Product({
+    title: title,
+    price: price,
+    description: description,
+    imageUrl: imageUrl,
   });
+  product
+    .save()
+    .then(() => {
+      res.json({
+        message: "Product added successfully!",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
-exports.postAddProduct = (req, res, next) => {
-  const product = new Product(req.body.title);
-  product.save();
-  res.redirect('/');
-};
+// exports.postAddProduct = (req, res, next) => {
+//   const product = new Product(req.body.title);
+//   product.save();
+//   res.redirect("/");
+// };
 
-exports.getProducts = (req, res, next) => {
-  Product.fetchAll(products => {
-  res.render('shop', {
-    prods: products,
-    pageTitle: 'Shop',
-    path: '/',
-    hasProducts: products.length > 0,
-    activeShop: true,
-    productCSS: true
-  });
-  });
-};
+// exports.getProducts = (req, res, next) => {
+//     Product.find().then((products) => {
+//         res.json(JSON.parse(products));
+//     }).catch((err) => {
+//         res.json(err);
+//     });
+// };
