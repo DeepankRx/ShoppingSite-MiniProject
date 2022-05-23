@@ -35,6 +35,7 @@ exports.getASingleProduct = (req, res, next) => {
           message: "Product not found!",
         });
       }
+      console.log("Prod",product);
     })
     .catch((err) => {
       console.log(err);

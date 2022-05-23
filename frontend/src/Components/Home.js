@@ -32,7 +32,11 @@ function Home() {
                 <h5 className="card-title">{product.title}</h5>
                 <p className="card-text">{product.description}</p>
                 <p className="card-text">{product.price}</p>
-                <button className="btn btn-primary">Add to Cart</button>
+                <button className="btn btn-primary">
+                  <Link
+                   style={{ color: "white", textDecoration: "none" }}
+                   to={`/add-to-cart/`+product._id}>Add to Cart</Link>
+                </button>
                 <button className="mx-4 btn btn-primary">
                   <Link
                     style={{ color: "white", textDecoration: "none" }}
@@ -51,7 +55,6 @@ function Home() {
                 </button>
                 <button className="center my-4 btn btn-primary">
                   <Link
-                    
                     style={{ color: "white", textDecoration: "none" }}
                     to={"/admin-product-update/" + product._id}
                   >
