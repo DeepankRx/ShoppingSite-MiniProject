@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 function Home() {
   const [products, setProducts] = useState([]);
 
@@ -34,7 +34,20 @@ function Home() {
                 <p className="card-text">{product.price}</p>
                 <button className="btn btn-primary">Add to Cart</button>
                 <button className="mx-4 btn btn-primary">
-                  <Link style={{ color:'white',textDecoration:'none'}}to={"/product/" + product._id}>Details</Link>
+                  <Link
+                    style={{ color: "white", textDecoration: "none" }}
+                    to={"/product/" + product._id}
+                  >
+                    Details
+                  </Link>
+                </button>
+                <button className="mx-4 btn btn-primary">
+                  <Link
+                    style={{ color: "white", textDecoration: "none" }}
+                    to={"/admin-product/" + product._id}
+                  >
+                    Delete Product
+                  </Link>
                 </button>
               </div>
             </div>

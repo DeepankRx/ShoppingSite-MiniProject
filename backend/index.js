@@ -18,11 +18,13 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use(express.json());
-
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 app.use("/api/admin", adminRoutes);
 app.use("/api/shop", shopRoutes);
+app.use("/",(req, res) =>{
+  res.sendFile(path.join(__dirname, "../frontend/public/404.html"));
+})
 const port = 5000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

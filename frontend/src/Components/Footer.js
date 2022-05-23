@@ -1,40 +1,40 @@
 import '../CSS/Footer.css';
-import { Modal } from "react-bootstrap";
+import {Link} from "react-router-dom"
 function Footer() {
   return (
     <footer>
       <div className="footer">
         <div className="footer-row">
-          <a href="#">
+          <Link to="#">
             <i className="fa fa-facebook"></i>
-          </a>
-          <a href="#">
+          </Link>
+          <Link to="#">
             <i className="fa fa-instagram"></i>
-          </a>
-          <a href="#">
+          </Link>
+          <Link to="#">
             <i className="fa fa-youtube"></i>
-          </a>
-          <a href="#">
+          </Link>
+          <Link to="#">
             <i className="fa fa-twitter"></i>
-          </a>
+          </Link>
         </div>
 
         <div className="footer-row">
           <ul>
             <li>
-              <a href="#">Contact us</a>
+              <Link to="#">Contact us</Link>
             </li>
             <li>
-              <a href="#">Our Services</a>
+              <Link to="#">Our Services</Link>
             </li>
             <li>
-              <a href="#">Privacy Policy</a>
+              <Link to="#">Privacy Policy</Link>
             </li>
             <li>
-              <a href="#">Terms & Conditions</a>
+              <Link to="#">Terms & Conditions</Link>
             </li>
             <li>
-              <a href="#">Career</a>
+              <Link to="#">Career</Link>
             </li>
           </ul>
         </div>

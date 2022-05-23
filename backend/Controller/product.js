@@ -42,6 +42,7 @@ exports.getASingleProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
+  console.log(req)
   Product.find()
     .then((products) => {
       res.json(products);
@@ -49,4 +50,13 @@ exports.getProducts = (req, res, next) => {
     .catch((err) => {
       res.json(err);
     });
+};
+
+exports.deleteProduct = (req, res, next) => {
+  const prodId = req.params.productId;
+  Product.findByIdAndDelete(prodId)
+    .then((product) => {
+      res.json("Product Deleted Successfully!");
+    })
+    .catch((err) => console.log(err));
 };

@@ -6,20 +6,23 @@ function AddProduct() {
   const [imageUrl, setImageUrl] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
-    const backendUrl = "http://localhost:5000/api/admin/add-product";
+  const backendUrl = "http://localhost:5000/api/admin/add-product";
   const handleSubmit = (e) => {
     e.preventDefault();
-  
-    axios.post(backendUrl,{ 
+
+    axios
+      .post(backendUrl, {
         title: title,
         imageUrl: imageUrl,
         price: price,
-        description: description
-    }).then((response) => {
+        description: description,
+      })
+      .then((response) => {
         console.log(response);
-    }).catch((error) => {
+      })
+      .catch((error) => {
         console.log(error);
-    });
+      });
     setImageUrl("");
     setTitle("");
     setPrice("");
@@ -68,7 +71,9 @@ function AddProduct() {
                 </div>
                 <div className="form-group">
                   <label>Product Price</label>
-                  <input type="number" className="form-control" 
+                  <input
+                    type="number"
+                    className="form-control"
                     value={price}
                     onChange={priceHandler}
                     required
@@ -76,7 +81,9 @@ function AddProduct() {
                 </div>
                 <div className="form-group">
                   <label>Product Image</label>
-                  <input type="text" className="form-control" 
+                  <input
+                    type="text"
+                    className="form-control"
                     value={imageUrl}
                     onChange={imageUrlHandler}
                     required
