@@ -6,13 +6,18 @@ function NavigationBar() {
     <>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="/">My Shopping Site</Navbar.Brand>
           <Nav className="me-auto">
-        <div>
-
-           <Link to='/add-product'> <Nav.Link href="/add-product">Add Product</Nav.Link></Link>
-        </div>
-            <Nav.Link href="#features">Features</Nav.Link>
+            <div>
+              <Link className="mx-3 link-light" to="/">
+                Shopper's Stop
+              </Link>
+            </div>
+            <div>
+              <Link className="link-light" to="/add-product">
+                {" "}
+                Add Product
+              </Link>
+            </div>
           </Nav>
         </Container>
       </Navbar>

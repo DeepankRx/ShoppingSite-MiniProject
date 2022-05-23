@@ -13,11 +13,17 @@ function App() {
       <div className="App">
         <NavigationBar />
         <Routes>
-          <Route path="/add-product" element={<AddProduct />} />
           <Route path="/" element={<Home />} />
+          <Route path="/add-product" element={<AddProduct />} />
           <Route path="/product/:productId" element={<SingleProduct />} />
-          <Route path="/admin-product/:productId" element={<DeleteProduct />} />
-          <Route path="/update-product/:productId" element={<UpdateProduct />} />
+          <Route
+            path="/admin-product-delete/:productId"
+            element={<DeleteProduct />}
+          />
+          <Route
+            path="/admin-product-update/:productId"
+            element={<UpdateProduct />}
+          />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />

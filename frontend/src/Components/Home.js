@@ -21,7 +21,7 @@ function Home() {
     <div className="Container">
       <div className="row">
         {products.map((product, i = 0) => (
-          <div className="col-md-4" key={product._id}>
+          <div className="mx-2 my-2 col-md-4" key={product._id}>
             <div className="card">
               <img
                 src={`https://source.unsplash.com/random/500x500?sig=${i + 1}`}
@@ -41,18 +41,19 @@ function Home() {
                     Details
                   </Link>
                 </button>
-                <button className="mx-4 btn btn-primary">
+                <button className="bottom btn btn-primary">
                   <Link
                     style={{ color: "white", textDecoration: "none" }}
-                    to={"/admin-product/" + product._id}
+                    to={"/admin-product-delete/" + product._id}
                   >
                     Delete Product
                   </Link>
                 </button>
-                <button className="mx-4 btn btn-primary">
+                <button className="center my-4 btn btn-primary">
                   <Link
+                    
                     style={{ color: "white", textDecoration: "none" }}
-                    to={"/update-product/" + product._id}
+                    to={"/admin-product-update/" + product._id}
                   >
                     Update Product
                   </Link>

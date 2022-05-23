@@ -2,12 +2,23 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 function UpdateProduct() {
-  const [title, setTitle] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
-  const params = useParams();
-  console.log(params.productId);
+    const [originalProduct, setOriginalProduct] = useState([]);
+    const [title, setTitle] = useState("");
+    const [imageUrl, setImageUrl] = useState("");
+    const [price, setPrice] = useState("");
+    const [description, setDescription] = useState("");
+    const params = useParams();
+    console.log(params.productId);
+    useEffect(() => {
+      axios
+        .get(`http://localhost:5000/api/shop/${params.productId}`)
+        .then((res) => {
+          setOriginalProduct(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, []);
   const handleSubmit = (e) => {
     const product = {};
     e.preventDefault();
