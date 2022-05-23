@@ -6,6 +6,7 @@ import Footer from "./Components/Footer";
 import SingleProduct from "./Components/SingleProduct";
 import DeleteProduct from "./Components/DeleteProduct";
 import UpdateProduct from "./Components/UpdateProduct";
+import PageNotFound from "./Components/PageNotFound";
 function App() {
   return (
     <Router>
@@ -17,6 +18,7 @@ function App() {
           <Route path="/product/:productId" element={<SingleProduct />} />
           <Route path="/admin-product/:productId" element={<DeleteProduct />} />
           <Route path="/update-product/:productId" element={<UpdateProduct />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />
       </div>
