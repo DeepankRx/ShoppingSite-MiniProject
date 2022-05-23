@@ -42,7 +42,6 @@ exports.getASingleProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-  console.log(req)
   Product.find()
     .then((products) => {
       res.json(products);
@@ -57,6 +56,19 @@ exports.deleteProduct = (req, res, next) => {
   Product.findByIdAndDelete(prodId)
     .then((product) => {
       res.json("Product Deleted Successfully!");
+    })
+    .catch((err) => console.log(err));
+};
+
+exports.updateProduct = (req, res, next) => {
+  const prodId = req.params.productId;
+  const updateOps = {};
+  for(const [key, value] of Object.entries(req.body)){
+    updateOps[key] = value;
+  }
+  Product.updateOne({ _id: prodId }, { $set: updateOps })
+    .then((product) => {
+      res.json("Product Updated Successfully!");
     })
     .catch((err) => console.log(err));
 };

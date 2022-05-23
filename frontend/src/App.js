@@ -5,6 +5,7 @@ import Home from "./Components/Home";
 import Footer from "./Components/Footer";
 import SingleProduct from "./Components/SingleProduct";
 import DeleteProduct from "./Components/DeleteProduct";
+import UpdateProduct from "./Components/UpdateProduct";
 function App() {
   return (
     <Router>
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/product/:productId" element={<SingleProduct />} />
           <Route path="/admin-product/:productId" element={<DeleteProduct />} />
+          <Route path="/update-product/:productId" element={<UpdateProduct />} />
         </Routes>
         <Footer />
       </div>

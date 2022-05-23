@@ -49,6 +49,14 @@ function Home() {
                     Delete Product
                   </Link>
                 </button>
+                <button className="mx-4 btn btn-primary">
+                  <Link
+                    style={{ color: "white", textDecoration: "none" }}
+                    to={"/update-product/" + product._id}
+                  >
+                    Update Product
+                  </Link>
+                </button>
               </div>
             </div>
           </div>
