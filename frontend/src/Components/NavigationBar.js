@@ -14,8 +14,13 @@ function NavigationBar() {
             </div>
             <div>
               <Link className="link-light" to="/add-product">
-                {" "}
+                
                 Add Product
+              </Link>
+            </div>
+            <div>
+              <Link className="link-light" to="/cart">
+                Cart
               </Link>
             </div>
           </Nav>

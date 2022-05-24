@@ -8,6 +8,7 @@ import DeleteProduct from "./Components/DeleteProduct";
 import UpdateProduct from "./Components/UpdateProduct";
 import PageNotFound from "./Components/PageNotFound";
 import AddToCart from "./Components/AddToCart";
+import Cart from "./Components/Cart";
 function App() {
   return (
     <Router>
@@ -25,10 +26,8 @@ function App() {
             path="/admin-product-update/:productId"
             element={<UpdateProduct />}
           />
-          <Route
-            path="/add-to-cart/:productId"
-            element={<AddToCart />}
-          />
+          <Route path="/add-to-cart/:productId" element={<AddToCart />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />

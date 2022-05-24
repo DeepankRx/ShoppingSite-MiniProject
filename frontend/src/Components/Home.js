@@ -21,7 +21,7 @@ function Home() {
     <div className="Container">
       <div className="row">
         {products.map((product, i = 0) => (
-          <div className="mx-2 my-2 col-md-4" key={product._id}>
+          <div className="my-2 col-md-4" key={product._id}>
             <div className="card">
               <img
                 src={`https://source.unsplash.com/random/500x500?sig=${i + 1}`}
@@ -34,8 +34,11 @@ function Home() {
                 <p className="card-text">{product.price}</p>
                 <button className="btn btn-primary">
                   <Link
-                   style={{ color: "white", textDecoration: "none" }}
-                   to={`/add-to-cart/`+product._id}>Add to Cart</Link>
+                    style={{ color: "white", textDecoration: "none" }}
+                    to={`/add-to-cart/` + product._id}
+                  >
+                    Add to Cart
+                  </Link>
                 </button>
                 <button className="mx-4 btn btn-primary">
                   <Link

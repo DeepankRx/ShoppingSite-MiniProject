@@ -6,7 +6,8 @@ const productsController = require("../Controller/product");
 const cartController = require("../Controller/cart");
 const router = express.Router();
 
+router.get("/getCart", cartController.getCart);
 router.get("/all-products", productsController.getProducts);
-router.get("/:productId", productsController.getASingleProduct);
 router.post("/cart", cartController.postCart);
+router.get("/:productId", productsController.getASingleProduct);
 module.exports = router;
