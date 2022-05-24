@@ -19,7 +19,7 @@ function NavigationBar() {
               </Link>
             </div>
             <div>
-              <Link className="link-light" to="/cart">
+              <Link className="mx-3 link-light" to="/cart">
                 Cart
               </Link>
             </div>

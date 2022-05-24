@@ -1,38 +1,46 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 function Cart() {
   const [cartItem, setCartItem] = useState([]);
   const [products, setProducts] = useState([]);
+  const [click, setClick] = useState(1);
+
   useEffect(() => {
     async function fetchCart() {
       await axios
         .get("http://localhost:5000/api/shop/getCart")
         .then((res) => {
+          console.log(res.data.products);
           setCartItem(res.data);
+          fetchProducts(res.data.products);
         })
         .catch((err) => {
           console.log(err);
         });
     }
     fetchCart();
+    async function fetchProducts(prod) {
+      const arr = [];
+      prod.map((product) => {
+        axios
+          .get(`http://localhost:5000/api/shop/${product.productId}`)
+          .then((res) => {
+            arr.push(res.data);
+            setProducts(arr);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
+    }
+  }, [click]);
 
-    async function fetchProducts() {
-      await axios
-        .get(`http://localhost:5000/api/shop/${cartItem.products[0].productId}`)
-        .then((res) => {
-          setProducts(res.data);
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-    if (cartItem.products) {
-      fetchProducts();
-    }
-  }, []);
-  console.log(products);
-  if (cartItem.products) {
+  if (cartItem.products && products) {
+    let total = 0;
+    cartItem.products.map((product) => {
+      total += product.price * product.quantity;
+    });
     return (
       <div className="container">
         <div className="row">
@@ -42,30 +50,38 @@ function Cart() {
               <thead>
                 <tr>
                   <th>Serial Number</th>
-                  <th>Product</th>
-
+                  <th>Product Image</th>
+                  <th>Product Name</th>
+                  <th>Price</th>
                   <th>Quantity</th>
-
+                  <th>Total</th>
                   <th>Remove</th>
                 </tr>
               </thead>
               <tbody>
-                {cartItem.products.map((item,i=0) => (
+                {cartItem.products.map((item, i = 0) => (
                   <tr key={item._id}>
-                  <td>{i+1}</td>
-                    <td>{item.productId}</td>
-                    <td>{!isNaN(item.quantity) ? item.quantity : 0}</td>
+                    <td>{i + 1}</td>
+                    <td><img src={`https://source.unsplash.com/random/75x75?sig=${i+1}`}></img></td>
+                    <td>{item.title}</td>
+                    <td>{item.price}</td>
+                    <td>{item.quantity}</td>
+                    <td>{item.quantity * item.price}</td>
                     <td>
                       <button
                         className="btn btn-danger"
                         onClick={() => {
                           axios
-                            .delete(
-                              `http://localhost:5000/api/shop/cart/${item._id}`
+                            .post(
+                              `http://localhost:5000/api/shop/delete-from-cart/`,
+                              {
+                                productId: item.productId,
+                              }
                             )
                             .then((response) => {
                               console.log(response.data);
                               setCartItem(response.data);
+                              setClick(1 + click);
                             })
                             .catch((error) => {
                               console.log(error);
@@ -79,16 +95,15 @@ function Cart() {
                 ))}
               </tbody>
             </table>
+            <div>
+              <h3>Total: ₹{total} </h3>
+            </div>
           </div>
         </div>
       </div>
     );
   } else {
-    return (
-      <div>
-        <h1>Cart is Empty</h1>
-      </div>
-    );
+    <Navigate to="/cart"></Navigate>;
   }
 }
 export default Cart;
