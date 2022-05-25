@@ -6,6 +6,7 @@ import axios from "axios";
 function NavigationBar() {
   const [clicked, setClicked] = useState(1);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/auth/isLoggedIn", {
@@ -29,13 +30,16 @@ function NavigationBar() {
                 Shopper's Stop
               </Link>
             </div>
-            {isLoggedIn === true ? (
-              <>
-                <div>
+            {isAdmin === true ? (
+              <div>
                   <Link className="link-light" to="/add-product">
                     Add Product
                   </Link>
                 </div>
+                ) : null}
+            {isLoggedIn === true ? (
+              <>
+                
                 <div>
                   <Link className="mx-3 link-light" to="/cart">
                     Cart

@@ -25,6 +25,9 @@ function AddToCart() {
         console.log(err);
       });
   }, []);
-  return <Navigate to="/cart"></Navigate>;
+  return (
+    alert("Product added to cart"),
+    <Navigate to="/" />
+);
 }
 export default AddToCart;

@@ -15,10 +15,15 @@ import Login from "./Components/Login";
 import LogOut from "./Components/LogOut";
 import { useEffect, useState } from "react";
 import axios from "axios";
+
 function App() {
+  console.log("App");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [location, setLocation] = useState("");
   useEffect(() => {
+    setLocation(window.location.pathname);
+    console.log(location);
     axios
       .get("http://localhost:5000/api/auth/isLoggedIn", {
         withCredentials: true,
