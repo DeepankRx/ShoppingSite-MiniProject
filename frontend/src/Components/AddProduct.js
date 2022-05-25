@@ -6,6 +6,7 @@ function AddProduct() {
   const [imageUrl, setImageUrl] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
   const backendUrl = "http://localhost:5000/api/admin/add-product";
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,6 +19,7 @@ function AddProduct() {
           imageUrl: imageUrl,
           price: price,
           description: description,
+          category: category,
         },
         {
           withCredentials: true,
@@ -94,6 +96,25 @@ function AddProduct() {
                     onChange={imageUrlHandler}
                     required
                   />
+                </div>
+                <div className="form-group">
+                  <label>Product Category</label>
+                  <select
+                    className="form-control"
+                    onChange={(e) => setCategory(e.target.value)}
+                    required
+                  >
+                    <option value="">Select Category</option>
+                    <option value="Shirts">Shirts</option>
+                    <option value="Jeans">Jeans</option>
+                    <option value="Jackets">Jackets</option>
+                    <option value="Sweaters">Sweaters</option>
+                    <option value="Accessories">Accessories</option>
+                    <option value="Shoes">Shoes</option>
+                    <option value="Watches">Watches</option>
+                    <option value="Bags">Bags</option>
+                    <option value="Caps">Caps</option>
+                  </select>
                 </div>
                 <button className="btn btn-success">Add Product</button>
               </form>

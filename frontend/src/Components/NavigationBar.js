@@ -15,6 +15,7 @@ function NavigationBar() {
       .then((response) => {
         console.log(response.data);
         setIsLoggedIn(response.data.loggedIn);
+        setIsAdmin(response.data.isAdmin);
       })
       .catch((error) => {
         console.log(error);

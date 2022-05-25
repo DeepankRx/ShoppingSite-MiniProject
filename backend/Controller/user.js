@@ -33,6 +33,7 @@ exports.loginUser = async (req, res) => {
       bcrypt
       .compare(password, user.password)
       .then((result) => {
+        console.log(user._id, user.isAdmin);
         req.session.isLoggedIn = true;
         req.session.userId = user._id;
         req.session.isAdmin = user.isAdmin;

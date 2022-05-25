@@ -11,6 +11,7 @@ exports.postAddProduct = async (req, res, next) => {
     price: price,
     description: description,
     imageUrl: imageUrl,
+    category: req.body.category,
   });
   product
     .save()
@@ -43,7 +44,7 @@ exports.getASingleProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-  console.log("IsLoggedIn:",req.session.isLoggedIn)
+  console.log("IsLoggedIn:", req.session.isLoggedIn);
   Product.find()
     .then((products) => {
       res.json(products);
@@ -71,6 +72,16 @@ exports.updateProduct = (req, res, next) => {
   Product.updateOne({ _id: prodId }, { $set: updateOps })
     .then((product) => {
       res.json("Product Updated Successfully!");
+    })
+    .catch((err) => console.log(err));
+};
+
+exports.getProductByCategory = async (req, res, next) => {
+  const prodId = req.params.productId;
+  const product = await Product.findById(prodId);
+  Product.find({ category: product.category })
+    .then((products) => {
+      res.json(products);
     })
     .catch((err) => console.log(err));
 };
