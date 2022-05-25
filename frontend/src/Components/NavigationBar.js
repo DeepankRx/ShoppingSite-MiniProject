@@ -23,6 +23,16 @@ function NavigationBar() {
                 Cart
               </Link>
             </div>
+            <div>
+              <Link className="mx-3 link-light" to="/login">
+                Login
+              </Link>
+            </div>
+            <div>
+              <Link className="mx-3 link-light" to="/signup">
+                Sign Up
+              </Link>
+            </div>
           </Nav>
         </Container>
       </Navbar>

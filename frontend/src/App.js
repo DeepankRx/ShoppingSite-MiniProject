@@ -9,6 +9,8 @@ import UpdateProduct from "./Components/UpdateProduct";
 import PageNotFound from "./Components/PageNotFound";
 import AddToCart from "./Components/AddToCart";
 import Cart from "./Components/Cart";
+import SignUp from "./Components/SignUp";
+import Login from "./Components/Login";
 function App() {
   return (
     <Router>
@@ -28,6 +30,8 @@ function App() {
           />
           <Route path="/add-to-cart/:productId" element={<AddToCart />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />
