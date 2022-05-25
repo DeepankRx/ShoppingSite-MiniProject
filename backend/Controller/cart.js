@@ -1,7 +1,7 @@
 const Cart = require("../Model/cart");
 const Product = require("../Model/product");
 exports.getCart = (req, res) => {
-  const userId = "5de7ffa74fff640a0491bc4f"; //TODO: the logged in user id
+  const userId = req.session.userId //TODO: the logged in user id
   Cart.findOne({ userId: userId }).then((cart) => {
     if (cart) {
       res.status(200).json(cart);
@@ -17,7 +17,7 @@ exports.postCart = async (req, res) => {
   const { productId, quantity } = req.body;
   const productDetails = await Product.findById(productId);
   console.log("product", productDetails);
-  const userId = "5de7ffa74fff640a0491bc4f";
+  const userId = req.session.userId;
 
   const cart = await Cart.findOne({ userId: userId });
   if (cart) {
@@ -61,7 +61,7 @@ exports.postCart = async (req, res) => {
 exports.deleteFromCart = (req, res) => {
   //delete a field from cart
   const productId = req.body.productId;
-  const userId = "5de7ffa74fff640a0491bc4f"; //TODO: the logged in user id
+  const userId = req.session.userId; //TODO: the logged in user id
   Cart.findOne({ userId: userId })
     .then((cart) => {
       const product = cart.products.find(

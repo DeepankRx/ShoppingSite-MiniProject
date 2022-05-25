@@ -8,7 +8,6 @@ function UpdateProduct() {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const params = useParams();
-  console.log(params.productId);
   useEffect(() => {
     axios
       .get(`http://localhost:5000/api/shop/${params.productId}`, {

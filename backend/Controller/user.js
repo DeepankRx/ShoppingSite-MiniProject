@@ -4,7 +4,6 @@ exports.createUser = async (req, res) => {
   const saltRounds = 10;
   const { name, email, password, address, phone } = req.body;
   const hashPassword = await bcrypt.hash(password, saltRounds);
-  console.log(req.session.isLoggedIn)
   const user = new User({
     name: name,
     email: email,
@@ -28,14 +27,16 @@ exports.createUser = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
-  req.session.isLoggedIn = true;
   console.log(req.body);
   User.findOne({ email: email }).then((user) => {
     if (user) {
       bcrypt
-        .compare(password, user.password)
-        .then((result) => {
-          console.log(req.session);
+      .compare(password, user.password)
+      .then((result) => {
+        req.session.isLoggedIn = true;
+        req.session.userId = user._id;
+        req.session.isAdmin = user.isAdmin;
+        console.log(req.session);
           res.json(result);
         })
         .catch((err) => {
@@ -54,6 +55,8 @@ exports.isLoggedIn = async (req, res) => {
     return res.json({
       message: "You are signed in",
       loggedIn: true,
+      isAdmin: req.session.isAdmin,
+      userId: req.session.userId,
     });
   } else {
     return res.json({
@@ -62,3 +65,15 @@ exports.isLoggedIn = async (req, res) => {
     });
   }
 };
+
+exports.logoutUser = (req, res) => {
+  req.session.destroy(function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json({
+        message: "Logout successfully!",
+      });
+    }
+  });
+}

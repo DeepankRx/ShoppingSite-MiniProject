@@ -3,10 +3,27 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 function Home() {
   const [products, setProducts] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/auth/isLoggedIn", {
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log(response.data);
+        setIsLoggedIn(response.data.loggedIn);
+        setIsAdmin(response.data.isAdmin);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [isLoggedIn]);
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/shop/all-products", {
+        //have to put withCredentials:true to get cookies from client
+        //have to put it in every axios request
         withCredentials: true,
       })
       .then((response) => {
@@ -16,18 +33,7 @@ function Home() {
       .catch((error) => {
         console.log(error);
       });
-    axios
-      .get("http://localhost:5000/api/auth/isLoggedIn", {
-        withCredentials: true,
-      })
-      .then((res) => {
-        console.log(res.data);
-        setLoggedIn(res.loggedIn);
-      })
-      .catch((err) => console.log(err));
   }, []);
-  console.log("Tests");
-  console.log(loggedIn);
   return (
     <div className="Container">
       <div className="row">
@@ -43,6 +49,7 @@ function Home() {
                 <h5 className="card-title">{product.title}</h5>
                 <p className="card-text">{product.description}</p>
                 <p className="card-text">{product.price}</p>
+                { isLoggedIn === true ? (
                 <button className="btn btn-primary">
                   <Link
                     style={{ color: "white", textDecoration: "none" }}
@@ -50,7 +57,16 @@ function Home() {
                   >
                     Add to Cart
                   </Link>
+                </button>) : (
+                  <button className="btn btn-primary">
+                  <Link
+                    style={{ color: "white", textDecoration: "none" }}
+                    to="/login"
+                  >
+                    Add to Cart
+                  </Link>
                 </button>
+                )}
                 <button className="mx-4 btn btn-primary">
                   <Link
                     style={{ color: "white", textDecoration: "none" }}
@@ -59,22 +75,28 @@ function Home() {
                     Details
                   </Link>
                 </button>
-                <button className="bottom btn btn-primary">
-                  <Link
-                    style={{ color: "white", textDecoration: "none" }}
-                    to={"/admin-product-delete/" + product._id}
-                  >
-                    Delete Product
-                  </Link>
-                </button>
-                <button className="center my-4 btn btn-primary">
-                  <Link
-                    style={{ color: "white", textDecoration: "none" }}
-                    to={"/admin-product-update/" + product._id}
-                  >
-                    Update Product
-                  </Link>
-                </button>
+                {isAdmin === true ? (
+                  <>
+                    <button className="bottom btn btn-primary">
+                      <Link
+                        style={{ color: "white", textDecoration: "none" }}
+                        to={"/admin-product-delete/" + product._id}
+                      >
+                        Delete Product
+                      </Link>
+                    </button>
+                    <button className="center my-4 btn btn-primary">
+                      <Link
+                        style={{ color: "white", textDecoration: "none" }}
+                        to={"/admin-product-update/" + product._id}
+                      >
+                        Update Product
+                      </Link>
+                    </button>
+                  </>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
           </div>

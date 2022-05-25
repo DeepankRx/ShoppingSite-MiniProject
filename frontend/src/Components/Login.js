@@ -26,8 +26,10 @@ function Login() {
       )
       .then((res) => {
         console.log(res);
-        if (res.data === true) alert("Login Successful");
-        else alert("Login Failed");
+        if (res.data === true) {
+          alert("Login Successful");
+          navigate("/");
+        } else alert("Login Failed");
       })
       .catch((err) => console.log(err));
   };
