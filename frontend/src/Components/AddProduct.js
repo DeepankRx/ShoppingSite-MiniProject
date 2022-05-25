@@ -11,12 +11,18 @@ function AddProduct() {
     e.preventDefault();
 
     axios
-      .post(backendUrl, {
-        title: title,
-        imageUrl: imageUrl,
-        price: price,
-        description: description,
-      })
+      .post(
+        backendUrl,
+        {
+          title: title,
+          imageUrl: imageUrl,
+          price: price,
+          description: description,
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then((response) => {
         console.log(response);
       })

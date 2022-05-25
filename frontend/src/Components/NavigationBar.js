@@ -14,7 +14,6 @@ function NavigationBar() {
             </div>
             <div>
               <Link className="link-light" to="/add-product">
-                
                 Add Product
               </Link>
             </div>

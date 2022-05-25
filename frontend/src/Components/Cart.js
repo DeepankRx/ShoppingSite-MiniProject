@@ -9,7 +9,9 @@ function Cart() {
   useEffect(() => {
     async function fetchCart() {
       await axios
-        .get("http://localhost:5000/api/shop/getCart")
+        .get("http://localhost:5000/api/shop/getCart", {
+          withCredentials: true,
+        })
         .then((res) => {
           console.log(res.data.products);
           setCartItem(res.data);
@@ -24,7 +26,9 @@ function Cart() {
       const arr = [];
       prod.map((product) => {
         axios
-          .get(`http://localhost:5000/api/shop/${product.productId}`)
+          .get(`http://localhost:5000/api/shop/${product.productId}`, {
+            withCredentials: true,
+          })
           .then((res) => {
             arr.push(res.data);
             setProducts(arr);
@@ -62,7 +66,13 @@ function Cart() {
                 {cartItem.products.map((item, i = 0) => (
                   <tr key={item._id}>
                     <td>{i + 1}</td>
-                    <td><img src={`https://source.unsplash.com/random/75x75?sig=${i+1}`}></img></td>
+                    <td>
+                      <img
+                        src={`https://source.unsplash.com/random/75x75?sig=${
+                          i + 1
+                        }`}
+                      ></img>
+                    </td>
                     <td>{item.title}</td>
                     <td>{item.price}</td>
                     <td>{item.quantity}</td>
@@ -76,6 +86,9 @@ function Cart() {
                               `http://localhost:5000/api/shop/delete-from-cart/`,
                               {
                                 productId: item.productId,
+                              },
+                              {
+                                withCredentials: true,
                               }
                             )
                             .then((response) => {

@@ -35,7 +35,7 @@ exports.getASingleProduct = (req, res, next) => {
           message: "Product not found!",
         });
       }
-      console.log("Prod",product);
+      console.log("Prod", product);
     })
     .catch((err) => {
       console.log(err);
@@ -43,6 +43,7 @@ exports.getASingleProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
+  console.log("IsLoggedIn:",req.session.isLoggedIn)
   Product.find()
     .then((products) => {
       res.json(products);
@@ -64,7 +65,7 @@ exports.deleteProduct = (req, res, next) => {
 exports.updateProduct = (req, res, next) => {
   const prodId = req.params.productId;
   const updateOps = {};
-  for(const [key, value] of Object.entries(req.body)){
+  for (const [key, value] of Object.entries(req.body)) {
     updateOps[key] = value;
   }
   Product.updateOne({ _id: prodId }, { $set: updateOps })

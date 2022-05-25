@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 function Home() {
   const [products, setProducts] = useState([]);
-
+  const [loggedIn, setLoggedIn] = useState(false);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/shop/all-products")
+      .get("http://localhost:5000/api/shop/all-products", {
+        withCredentials: true,
+      })
       .then((response) => {
         console.log(response.data);
         setProducts(response.data);
@@ -14,9 +16,18 @@ function Home() {
       .catch((error) => {
         console.log(error);
       });
+    axios
+      .get("http://localhost:5000/api/auth/isLoggedIn", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log(res.data);
+        setLoggedIn(res.loggedIn);
+      })
+      .catch((err) => console.log(err));
   }, []);
   console.log("Tests");
-
+  console.log(loggedIn);
   return (
     <div className="Container">
       <div className="row">

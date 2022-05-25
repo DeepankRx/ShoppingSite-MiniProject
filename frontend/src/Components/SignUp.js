@@ -32,13 +32,19 @@ function SignUp() {
     e.preventDefault();
     if (password === confirmPassword) {
       axios
-        .post("http://localhost:5000/api/auth/register", {
-          name: name,
-          email: email,
-          password: password,
-          address: address,
-          phone: phone,
-        })
+        .post(
+          "http://localhost:5000/api/auth/register",
+          {
+            name: name,
+            email: email,
+            password: password,
+            address: address,
+            phone: phone,
+          },
+          {
+            withCredentials: true,
+          }
+        )
         .then((res) => {
           alert(res.data.message);
           console.log(res);
@@ -49,7 +55,7 @@ function SignUp() {
             setPassword("");
             setPhone("");
             setConfirmPassword("");
-              navigate("/login");
+            navigate("/login");
           }
         })
         .catch((err) => {

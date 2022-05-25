@@ -6,7 +6,7 @@ const productsController = require("../Controller/product");
 const cartController = require("../Controller/cart");
 const router = express.Router();
 
-router.post("/delete-from-cart",cartController.deleteFromCart);
+router.post("/delete-from-cart", cartController.deleteFromCart);
 router.get("/getCart", cartController.getCart);
 router.get("/all-products", productsController.getProducts);
 router.post("/cart", cartController.postCart);

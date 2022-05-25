@@ -8,10 +8,16 @@ function AddToCart() {
   useEffect(() => {
     console.log("Inside useEffect");
     axios
-      .post(`http://localhost:5000/api/shop/cart/`, {
-        productId: params.productId,
-        quantity: 1,
-      })
+      .post(
+        `http://localhost:5000/api/shop/cart/`,
+        {
+          productId: params.productId,
+          quantity: 1,
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
         console.log(res);
       })

@@ -9,7 +9,7 @@ const userSchema = Schema(
     email: {
       type: String,
       required: true,
-      unique:true,
+      unique: true,
     },
     password: {
       type: String,
@@ -22,7 +22,7 @@ const userSchema = Schema(
     phone: {
       type: String,
       required: true,
-      unique:true,
+      unique: true,
     },
     isAdmin: {
       type: Boolean,
