@@ -35,6 +35,7 @@ function AddProduct() {
     setTitle("");
     setPrice("");
     setDescription("");
+    setCategory("");
   };
   const titleHandler = (e) => {
     setTitle(e.target.value);

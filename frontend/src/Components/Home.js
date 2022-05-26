@@ -5,6 +5,41 @@ function Home() {
   const [products, setProducts] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const AddToCart = (productId) => {
+    console.log(productId);
+    axios
+      .post(
+        `http://localhost:5000/api/shop/cart/`,
+        {
+          productId: productId,
+          quantity: 1,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        alert("Product Added Successfully!");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const deleteProduct = (productId) => {
+    console.log(productId);
+    axios
+      .delete(`http://localhost:5000/api/admin/delete-product/${productId}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        alert("Product Deleted Successfully!");
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/auth/isLoggedIn", {
@@ -49,23 +84,22 @@ function Home() {
                 <h5 className="card-title">{product.title}</h5>
                 <p className="card-text">{product.description}</p>
                 <p className="card-text">{product.price}</p>
-                { isLoggedIn === true ? (
-                <button className="btn btn-primary">
-                  <Link
-                    style={{ color: "white", textDecoration: "none" }}
-                    to={`/add-to-cart/` + product._id}
+                {isLoggedIn === true ? (
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => AddToCart(product._id)}
                   >
                     Add to Cart
-                  </Link>
-                </button>) : (
+                  </button>
+                ) : (
                   <button className="btn btn-primary">
-                  <Link
-                    style={{ color: "white", textDecoration: "none" }}
-                    to="/login"
-                  >
-                    Add to Cart
-                  </Link>
-                </button>
+                    <Link
+                      style={{ color: "white", textDecoration: "none" }}
+                      to="/login"
+                    >
+                      Add to Cart
+                    </Link>
+                  </button>
                 )}
                 <button className="mx-4 btn btn-primary">
                   <Link
@@ -77,13 +111,11 @@ function Home() {
                 </button>
                 {isAdmin === true ? (
                   <>
-                    <button className="bottom btn btn-primary">
-                      <Link
-                        style={{ color: "white", textDecoration: "none" }}
-                        to={"/admin-product-delete/" + product._id}
-                      >
-                        Delete Product
-                      </Link>
+                    <button
+                      className="bottom btn btn-primary"
+                      onClick={() => deleteProduct(product._id)}
+                    >
+                      Delete Product
                     </button>
                     <button className="center my-4 btn btn-primary">
                       <Link

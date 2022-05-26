@@ -1,18 +1,16 @@
-import NavigationBar from "./Components/NavigationBar";
+import NavigationBar from "./Components/Navigation Bar/NavigationBar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import AddProduct from "./Components/AddProduct";
 import Home from "./Components/Home";
 import Footer from "./Components/Footer";
 import SingleProduct from "./Components/SingleProduct";
-import DeleteProduct from "./Components/DeleteProduct";
 import UpdateProduct from "./Components/UpdateProduct";
 import PageNotFound from "./Components/PageNotFound";
-import AddToCart from "./Components/AddToCart";
 import Cart from "./Components/Cart";
 import SignUp from "./Components/SignUp";
 import Login from "./Components/Login";
-import LogOut from "./Components/LogOut";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -56,32 +54,12 @@ function App() {
           />
           <Route path="/product/:productId" element={<SingleProduct />} />
           <Route
-            path="/admin-product-delete/:productId"
-            element={
-              isAdmin === false ? (
-                <Navigate to="/"></Navigate>
-              ) : (
-                <DeleteProduct />
-              )
-            }
-          />
-          <Route
             path="/admin-product-update/:productId"
             element={
               isAdmin === false ? (
                 <Navigate to="/"></Navigate>
               ) : (
                 <UpdateProduct />
-              )
-            }
-          />
-          <Route
-            path="/add-to-cart/:productId"
-            element={
-              isLoggedIn === false ? (
-                <Navigate to="/login"></Navigate>
-              ) : (
-                <AddToCart />
               )
             }
           />
@@ -108,16 +86,7 @@ function App() {
               isLoggedIn === true ? <Navigate to="/"></Navigate> : <Login />
             }
           />
-          <Route
-            path="/logout"
-            element={
-              isLoggedIn === false ? (
-                <Navigate to="/login"></Navigate>
-              ) : (
-                <LogOut />
-              )
-            }
-          />
+
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />
