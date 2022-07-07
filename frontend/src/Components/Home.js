@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import "../CSS/Card.module.css";
 function Home() {
   const [products, setProducts] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -68,7 +69,7 @@ function Home() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, []); 
   return (
     <div className="Container">
       <div className="row">
@@ -76,13 +77,13 @@ function Home() {
           <div className="my-2 col-md-4" key={product._id}>
             <div className="card">
               <img
-                src={`https://source.unsplash.com/random/500x500?sig=${i + 1}`}
-                className="image-fluid"
+                src={`https://source.unsplash.com/random/350x200?sig=${i + 1}`}
+                className="card-image"
                 alt="..."
               />
               <div className="card-body">
-                <h5 className="card-title">{product.title}</h5>
-                <p className="card-text">{product.description}</p>
+                <h5 className="card-heading">{product.title}</h5>
+                <p className="card-para">{product.description}</p>
                 <p className="card-text">{product.price}</p>
                 {isLoggedIn === true ? (
                   <button
@@ -135,6 +136,7 @@ function Home() {
         ))}
       </div>
     </div>
+    
   );
 }
 export default Home;

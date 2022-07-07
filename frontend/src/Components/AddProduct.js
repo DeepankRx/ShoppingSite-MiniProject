@@ -1,4 +1,3 @@
-import "bootstrap/dist/css/bootstrap.css";
 import { useState } from "react";
 import axios from "axios";
 function AddProduct() {
