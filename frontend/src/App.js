@@ -11,82 +11,87 @@ import Cart from "./Components/Cart";
 import SignUp from "./Components/SignUp";
 import Login from "./Components/Login";
 import agent from "./agent";
-import { useEffect, useState } from "react";
-import axios from "axios";
-
+import { useEffect, useState, useContext } from "react";
+import SessionState from "./Context/SessionDetails/SessionState";
 function App() {
-  console.log("App");
+  const a = useContext(SessionState);
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [location, setLocation] = useState("");
   useEffect(() => {
-    setLocation(window.location.pathname);
-    console.log(location);
     agent.Auth.isLoggedIn().then((response) => {
-      console.log(response.data,"asdfad");
       setIsLoggedIn(response.data.loggedIn);
       setIsAdmin(response.data.isAdmin);
+      a.setIsAdmin(response.data.isAdmin);
+      a.setIsLoggedIn(response.data.loggedIn);
     }
     );
-
   }, []);
-  console.log(isLoggedIn);
+
   return (
-    <Router>
-      <div className="App">
-        <NavigationBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/add-product"
-            element={
-              isAdmin === false ? (
-                <Navigate to="/login"></Navigate>
-              ) : (
-                <AddProduct />
-              )
-            }
-          />
-          <Route path="/product/:productId" element={<SingleProduct />} />
-          <Route
-            path="/admin-product-update/:productId"
-            element={
-              isAdmin === false ? (
-                <Navigate to="/"></Navigate>
-              ) : (
-                <UpdateProduct />
-              )
-            }
-          />
+    <>
+      <Router>
+        <SessionState>
+          <div className="App">
+            <NavigationBar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="/add-product"
+                element={
+                  isAdmin === false ? (
+                    <Navigate to="/login"></Navigate>
+                  ) : (
+                    <AddProduct />
+                  )
+                }
+              />
+              <Route path="/product/:productId" element={<SingleProduct />} />
+              <Route
+                path="/admin-product-update/:productId"
+                element={
+                  isAdmin === false ? (
+                    <Navigate to="/"></Navigate>
+                  ) : (
+                    <UpdateProduct />
+                  )
+                }
+              />
 
-          <Route
-            path="/cart"
-            element={
-              isLoggedIn === false ? (
-                <Navigate to="/login"></Navigate>
-              ) : (
-                <Cart />
-              )
-            }
-          />
-          <Route
-            path="/signup"
-            element={
-              isLoggedIn === false ? <SignUp /> : <Navigate to="/"></Navigate>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              isLoggedIn === true ? <Navigate to="/"></Navigate> : <Login />
-            }
-          />
+              <Route
+                path="/cart"
+                element={
+                  isLoggedIn === false ? (
+                    <Navigate to="/login"></Navigate>
+                  ) : (
+                    <Cart />
+                  )
+                }
+              />
+              <Route
+                path="/signup"
+                element={
+                  isLoggedIn === false ? (
+                    <SignUp />
+                  ) : (
+                    <Navigate to="/"></Navigate>
+                  )
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  isLoggedIn === true ? <Navigate to="/"></Navigate> : <Login />
+                }
+              />
 
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+            <Footer />
+          </div>
+        </SessionState>
+      </Router>
+    </>
   );
 }
 

@@ -1,12 +1,20 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import SessionContext from "../Context/SessionDetails/SessionContext";
 import agent from "../agent";
 import Card from "../Components/Card/Card";
-import styles from '../CSS/Card.module.css';
+import styles from "../CSS/Card.module.css";
 function Home() {
   const [products, setProducts] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const a = useContext(SessionContext);
+  console.log(a);
+  useEffect(() => {
+    setIsLoggedIn(a.isLoggedIn);
+    setIsAdmin(a.isAdmin);
+  }, [a]);
+  
   const AddToCart = (productId) => {
     axios
       .post(
@@ -42,12 +50,6 @@ function Home() {
       });
   };
   useEffect(() => {
-    agent.Auth.isLoggedIn().then((response) => {
-      setIsLoggedIn(response.data.loggedIn);
-      setIsAdmin(response.data.isAdmin);
-    });
-  }, [isLoggedIn]);
-  useEffect(() => {
     axios
       .get("http://localhost:5000/api/shop/all-products", {
         //have to put withCredentials:true to get cookies from client
@@ -55,7 +57,6 @@ function Home() {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response.data);
         setProducts(response.data);
       })
       .catch((error) => {
@@ -79,8 +80,6 @@ function Home() {
             deleteProduct={deleteProduct}
             key={product._id}
           />
-          
-
         ))}
       </div>
     </div>

@@ -12,7 +12,6 @@ function Slider() {
           withCredentials: true,
         })
         .then((response) => {
-          console.log(response.data);
           setProducts(response.data);
         })
         .catch((error) => {

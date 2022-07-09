@@ -38,7 +38,14 @@ exports.loginUser = async (req, res) => {
         req.session.userId = user._id;
         req.session.isAdmin = user.isAdmin;
         console.log(req.session);
-          res.json(result);
+          res.json(
+            {
+              message: "Login successfully!",
+              loggedIn: true,
+              isAdmin: user.isAdmin,
+              userId: user._id,
+            }
+          );
         })
         .catch((err) => {
           console.log(err);

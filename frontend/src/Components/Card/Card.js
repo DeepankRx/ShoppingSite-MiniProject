@@ -2,6 +2,9 @@ import styles from "./Card.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 function Card(props) {
+  const onDoubleClick = () => {
+    window.location.reload();
+  }
   return (
     <div className={styles.container} key={props.productId}>
       <div className={styles.card}>
@@ -26,23 +29,27 @@ function Card(props) {
             <div className={styles.btn}>
               {/* <a href="">Buy Now</a> */}
               {props.isLoggedIn ? (
-                <Link to="" onClick={() => props.AddToCart(props.productId)}>
+                <button className={styles.btn} onClick={() => props.AddToCart(props.productId)}
+                onDoubleClick={onDoubleClick}
+                >
                   Add to Cart
-                </Link>
+                </button>
               ) : (
-                <Link to="/login">Add to Cart</Link>
+                <Link to="/login"
+                onDoubleClick={onDoubleClick}
+                >Add to Cart</Link>
               )}
               {props.isAdmin ? (
                 <>
                   <Link to={"/admin-product-update/" + props.productId}>
                     Update
                   </Link>
-                  <Link
-                    to=""
+                  <button
+            
                     onClick={() => props.deleteProduct(props.productId)}
                   >
                     Delete
-                  </Link>
+                  </button>
                 </>
               ) : null}
             </div>
