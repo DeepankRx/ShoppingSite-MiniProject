@@ -1,8 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import agent from "../agent";
 function Login() {
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const emailHandler = (e) => {
@@ -13,25 +11,7 @@ function Login() {
   };
   const submitHandler = (e) => {
     e.preventDefault();
-    axios
-      .post(
-        "http://localhost:5000/api/auth/login",
-        {
-          email: email,
-          password: password,
-        },
-        {
-          withCredentials: true,
-        }
-      )
-      .then((res) => {
-        console.log(res);
-        if (res.data === true) {
-          alert("Login Successful");
-          navigate("/");
-        } else alert("Login Failed");
-      })
-      .catch((err) => console.log(err));
+    agent.Auth.login(email, password);
   };
   return (
     <div>

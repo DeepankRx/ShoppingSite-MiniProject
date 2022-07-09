@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./Navigation.module.css";
-import classnames from 'classnames';
+import classnames from "classnames";
 import Slider from "../Util/Slider";
+import Login from "../Login"
 function NavigationBar() {
+  console.log(Login)
   const [clicked, setClicked] = useState(1);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -15,7 +17,7 @@ function NavigationBar() {
       })
       .then((response) => {
         console.log(response.data);
-        setIsLoggedIn(response.data.loggedIn);
+        setIsLoggedIn(false);
       })
       .catch((error) => {
         console.log(error);
@@ -74,7 +76,7 @@ function NavigationBar() {
           </div>
         </div>
       </div> */}
-      <header className={styles.header}>
+      {/* <header className={styles.header}>
         <img
           className={styles.logo}
           src="https://source.unsplash.com/random/250x50?sig=100"
@@ -128,6 +130,62 @@ function NavigationBar() {
           </>
         )}
       </header>
+      <Slider/> */}
+      <div className={styles.wrapper}>
+        <nav>
+          <Link to="/" className={styles.logo}>
+            Thrift Shop
+          </Link>
+          {/* add a search bar
+           */}
+          
+          <ul>
+          {isAdmin === true ? (
+              <li className={styles.li}>
+                <Link className={styles.a} to="/add-product">
+                  Add Product
+                </Link>
+              </li>
+            ) : null}
+           
+            {isLoggedIn === true ? (
+              <li className={styles.li}>
+                <Link className={styles.a} to="/cart">
+                <i className="fa fa-shopping-cart"
+                style={{
+                  fontSize: "2rem", 
+                }}
+                 aria-hidden="true"></i>
+                </Link>
+              </li>
+            ) : null}
+            <li>
+            </li>
+          </ul>
+            {isLoggedIn === true ? (
+              <li className={styles.li}>
+                <Link className={styles.a} to="/">
+                <i className="fa fa-sign-out"
+                style={{
+                  fontSize: "2rem", 
+                }}
+                 aria-hidden="true"
+                 title="Logout"
+                 onClick={()=>logOut()}></i>
+                </Link>
+              </li>
+            ) : (
+          <>
+            <Link className={styles.a} to="/login">
+              <button className={styles.button}>Login</button>
+            </Link>
+            <Link className={styles.a} to="/signup">
+              <button className={classnames(styles.signup_button,styles.button)} >Sign Up</button>
+            </Link>
+          </>
+        )}
+        </nav>
+      </div>
       <Slider/>
     </>
   );

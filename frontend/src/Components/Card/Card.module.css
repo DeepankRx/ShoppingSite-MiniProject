@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap");
+
+.container {
+  height: 80vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.card {
+  width: 300px;
+  height: 440px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
+}
+.card > *:not(img) {
+  padding: 5px 10px;
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+}
+
+.cardBody {
+  padding: 5px;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+
+.cardBody p {
+  color: #3d3d3d;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.viewBtn a {
+  padding: 5px 15px;
+  border: 1.5px solid #007bff;
+  border-radius: 3px;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.btnGroup {
+  display: flex;
+}
+
+.btnGroup .btn a {
+  padding: 5px 15px;
+  background-color: #28a745;
+  color: #fff;
+  border-radius: 3px;
+  margin-left: -2px;
+}
+.btnGroup a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #000;
+}

@@ -10,7 +10,7 @@ import PageNotFound from "./Components/PageNotFound";
 import Cart from "./Components/Cart";
 import SignUp from "./Components/SignUp";
 import Login from "./Components/Login";
-
+import agent from "./agent";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -22,18 +22,13 @@ function App() {
   useEffect(() => {
     setLocation(window.location.pathname);
     console.log(location);
-    axios
-      .get("http://localhost:5000/api/auth/isLoggedIn", {
-        withCredentials: true,
-      })
-      .then((response) => {
-        console.log(response.data);
-        setIsLoggedIn(response.data.loggedIn);
-        setIsAdmin(response.data.isAdmin);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    agent.Auth.isLoggedIn().then((response) => {
+      console.log(response.data,"asdfad");
+      setIsLoggedIn(response.data.loggedIn);
+      setIsAdmin(response.data.isAdmin);
+    }
+    );
+
   }, []);
   console.log(isLoggedIn);
   return (

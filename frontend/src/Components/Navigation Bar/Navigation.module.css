@@ -1,79 +1,113 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:500');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 
-}
-
-.li,.a,.button{
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
-  font-size:16px;
-  color:#edf0f1;
-  text-decoration: none;
-}
-.a
-{
-  color:#2155CD;
-}
-
-.header{
-  white-space: normal;
+.wrapper {
+  height: 65px;
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  padding: 30px 10%;
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
-  z-index: 1;
-  width: 100%;
-  background-color: #E8F9FD;
+  justify-content:center;
+  background-color: #2874f0;
+}
+.button
+{
+  color: #2874f0;
+  font-weight: 500;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 2px;
+  height: 35px;
+  padding: 0px 40px;
+  border: 1px solid #dbdbdb;
+}
+nav {
+  display: flex;
+  width: 90%;
 }
 
-.logo{
-  cursor: pointer;
+ul li a {
+  margin-left: 1.5em;
+}
+
+a.logo {
   margin-right: auto;
 }
 
-.nav__links
-{
+ul {
+  display: flex;
   list-style: none;
+  margin: 0px;
+  padding: 0px;
 }
 
-.nav__links .li{
-  display: inline-block;
-  padding: 0px 20px;
+a {
+  text-decoration: none;
+  color: #ffffff;
+  position: relative;
+  font-size: 1.25em;
 }
 
-.nav__links .li .a{
-  transition: all 0.3s ease 0;
-}
-.nav__links .li .a:hover{
-  color:#0088a9;
-}
-
-.button
-{
-  padding: 9px 25px;
-  background-color: #0AA1DD;
-  border: 1px solid rgb(84, 220, 254);
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.3s ease 0;
+a::after {
+  content:"";
+  top: 80%;
+  border-bottom: 2px solid #F8E71C;
+  transition: all 0.35s;
+  position: absolute;
 }
 
-.button:hover{
-  background-color: #0088a9;
- opacity: 0.8;
-
+a:hover::after {
+  transition: all 0.35s;
 }
 
-.signup_button
-{
-  background-color: #2155CD;
-  border: 1px solid rgb(34, 202, 135);
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.3s ease 0;
-  margin-left: 1rem;
+a::after {
+  right: 50%;
+  left: 50%;
+}
+
+a:hover::after {
+  right: 0;
+  left: 0;
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    height: auto;
+  }
+  
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  a.logo {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    margin-right: 0px;
+  }
+  
+  ul {
+    width: 100%;
+    margin-bottom: 1em;
+    justify-content: space-between;
+  }
+  
+  ul li a {
+    margin-left: 0px;
+  }
+}
+
+@media (max-width: 768px) {
+  a.logo {
+    margin: 1.5em;
+  }
+  
+  ul {
+    flex-direction: column;
+  }
+  
+  ul li {
+    margin: 0.3em;
+    text-align: center;
+  }
+  
+  ul li a {
+    margin-left: 0px;
+  }
 }

@@ -25,11 +25,15 @@ function Slider() {
       autoPlay={true}
       interval={3000}
       showArrows={false}
+      showThumbs={false}
+      
     >
         {products.map((product,i=0) => (
 
-      <div>
-        <img src={"https://source.unsplash.com/random/1000x500?sig="+product.price} />
+      <div key={i++}>
+        <img src={"https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2020&q=80"} 
+          style={{width: "100%", height: "600px"}}
+        />
         <p className="legend">{product.title}</p>
       </div>)
       )}
