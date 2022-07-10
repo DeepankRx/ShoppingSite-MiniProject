@@ -2,25 +2,30 @@ import { useState } from "react";
 import axios from "axios";
 function AddProduct() {
   const [title, setTitle] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [image, setImage] = useState({ preview: "", data: "" });
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const backendUrl = "http://localhost:5000/api/admin/add-product";
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    //if image is uploaded
+    if (image.data) {
+      
     axios
       .post(
         backendUrl,
         {
           title: title,
-          imageUrl: imageUrl,
+          image: image.data,
           price: price,
           description: description,
           category: category,
         },
         {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
           withCredentials: true,
         }
       )
@@ -30,17 +35,27 @@ function AddProduct() {
       .catch((error) => {
         console.log(error);
       });
-    setImageUrl("");
+    setImage({ preview: "", data: "" });
     setTitle("");
     setPrice("");
     setDescription("");
     setCategory("");
+    }
+    else
+    {
+      alert("Image already uploaded");
+    }
   };
   const titleHandler = (e) => {
     setTitle(e.target.value);
   };
-  const imageUrlHandler = (e) => {
-    setImageUrl(e.target.value);
+  const imageHandler = (e) => {
+    const img = {
+      preview: URL.createObjectURL(e.target.files[0]),
+      data: e.target.files[0],
+    };
+    console.log(img);
+    setImage(img);
   };
   const priceHandler = (e) => {
     setPrice(e.target.value);
@@ -57,7 +72,7 @@ function AddProduct() {
               <h3>Add Product</h3>
             </div>
             <div className="card-body">
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className="form-group">
                   <label>Product Name</label>
                   <input
@@ -88,12 +103,11 @@ function AddProduct() {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Product Image</label>
+                  <label>Product image</label>
                   <input
-                    type="text"
+                    type="file"
                     className="form-control"
-                    value={imageUrl}
-                    onChange={imageUrlHandler}
+                    onChange={imageHandler}
                     required
                   />
                 </div>

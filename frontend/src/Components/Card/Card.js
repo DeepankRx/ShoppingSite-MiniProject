@@ -2,13 +2,19 @@ import styles from "./Card.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 function Card(props) {
+
+
   const onDoubleClick = () => {
     window.location.reload();
   }
   return (
     <div className={styles.container} key={props.productId}>
       <div className={styles.card}>
-        <img src={props.image} alt="" />
+        <img src={
+          // require('../../'+props.imageUrl)
+          require(`../../uploads/${props.imageUrl}`)
+       
+          } alt="" />
         <div className={styles.cardBody}>
           <div className={styles.row}>
             <div>

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 function SingleProduct() {
   const [product, setProduct] = useState([]);
   const [sameCategoryProducts, setSameCategoryProducts] = useState([]);
-
+  const [imageUrl, setImageUrl] = useState("");
   const params = useParams();
   console.log(params.productId);
 
@@ -15,6 +15,7 @@ function SingleProduct() {
       })
       .then((res) => {
         setProduct(res.data);
+        setImageUrl(res.data.imageUrl);
       })
       .catch((err) => {
         console.log(err);
@@ -30,8 +31,13 @@ function SingleProduct() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [imageUrl]);
   console.log(product);
+  if(product.length === 0){
+    return <div>Loading...</div>
+  }
+  else
+  {
   return (
     <>
       <div className="container">
@@ -39,7 +45,12 @@ function SingleProduct() {
           <div className="col-md-12">
             <div className="card">
               <img
-                src={"https://source.unsplash.com/random/2000x2000?sig=1"}
+                src={
+                 
+                  require(`../uploads/${product.imageUrl}`)
+                 
+                  // "../uploads/"+product.imageUrl
+                }
                 className="card-img-bottom"
                 alt="..."
               />
@@ -60,10 +71,15 @@ function SingleProduct() {
       <div className="container">
         <div className="row">
           {sameCategoryProducts.map((item) => (
+            console.log("item",item.imageUrl),
             <div className="col-md-3" key={item._id}>
               <div className="card">
                 <img
-                  src={`https://source.unsplash.com/random/200x200?sig=${item._id}`}
+                  src={
+                    // item.imageUrl > 0 ?
+                  require(`../uploads/${item.imageUrl}`)
+                  // : require("../uploads/cover1.jpg")
+                  }
                   className="card-img-bottom"
                   alt="..."
                 />
@@ -82,5 +98,6 @@ function SingleProduct() {
       </div>
     </>
   );
+                }
 }
 export default SingleProduct;

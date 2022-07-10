@@ -34,7 +34,7 @@ function Cart() {
             setProducts(arr);
           })
           .catch((err) => {
-            console.log(err);
+            console.log(err.response.data);
           });
       });
     }
@@ -68,9 +68,9 @@ function Cart() {
                     <td>{i + 1}</td>
                     <td>
                       <img
-                        src={`https://source.unsplash.com/random/75x75?sig=${
-                          i + 1
-                        }`}
+                        src={
+                          require(`../uploads/${item.imageUrl}`)
+                        }
                       ></img>
                     </td>
                     <td>{item.title}</td>

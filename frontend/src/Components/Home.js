@@ -68,10 +68,11 @@ function Home() {
     <div className={styles.Container}>
       <div className="row">
         {products.map((product, i = 0) => (
+          console.log(product.imageUrl),
           <Card
             title={product.title}
             price={product.price}
-            image={`https://source.unsplash.com/random/350x200?sig=${i + 1}`}
+            imageUrl={product.imageUrl}
             description={product.description}
             productId={product._id}
             isLoggedIn={isLoggedIn}

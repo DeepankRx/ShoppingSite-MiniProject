@@ -29,6 +29,8 @@ app.use(
   })
 );
 app.use(cookieParser());
+console.log(path.join(__dirname, "../uploads"));
+// app.use(express.static(path.join(__dirname, "uploads")));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 
@@ -39,8 +41,8 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use(express.json());
-const adminRoutes = require("./routes/admin");
-const shopRoutes = require("./routes/shop");
+const adminRoutes = require("./Routes/admin");
+const shopRoutes = require("./Routes/shop");
 const authRoutes = require("./Routes/auth");
 app.use("/api/admin", adminRoutes);
 app.use("/api/shop", shopRoutes);

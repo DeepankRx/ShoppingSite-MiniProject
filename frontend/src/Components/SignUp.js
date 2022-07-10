@@ -59,8 +59,8 @@ function SignUp() {
           }
         })
         .catch((err) => {
-          console.log(err);
-          alert(err);
+          console.log(err.response.data);
+          alert(err.response.data);
         });
     } else {
       alert("Password do not match");

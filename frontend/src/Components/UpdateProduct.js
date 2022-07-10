@@ -105,7 +105,7 @@ function UpdateProduct() {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Product Image</label>
+                  <label>Product imageUrl</label>
                   <input
                     type="text"
                     className="form-control"
