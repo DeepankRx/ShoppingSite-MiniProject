@@ -14,7 +14,7 @@ function Home() {
     setIsLoggedIn(a.isLoggedIn);
     setIsAdmin(a.isAdmin);
   }, [a]);
-  
+
   const AddToCart = (productId) => {
     axios
       .post(
@@ -65,25 +65,53 @@ function Home() {
   }, []);
 
   return (
-    <div className={styles.Container}>
-      <div className="row">
-        {products.map((product, i = 0) => (
+    <>
+      <h1
+        style={{
+          textAlign: "center",
+          marginTop: "50px",
+          marginBottom: "50px",
+          fontSize: "50px",
+          textDecoration: "underline",
+          
+        }}
+      >
+        Welcome to the{" "}
+        <span 
+          style={{
+            color:"red",
+            fontSize: "50px",
+            fontWeight: "bold",
+          }}
+
+        >
+          <strong>
+            <i>Thrift Shop</i>
+          </strong>
+        </span>
+
+      </h1>
+      {products.map(
+        (product, i = 0) => (
           console.log(product.imageUrl),
-          <Card
-            title={product.title}
-            price={product.price}
-            imageUrl={product.imageUrl}
-            description={product.description}
-            productId={product._id}
-            isLoggedIn={isLoggedIn}
-            isAdmin={isAdmin}
-            AddToCart={AddToCart}
-            deleteProduct={deleteProduct}
-            key={product._id}
-          />
-        ))}
-      </div>
-    </div>
+          (
+            <Card
+              title={product.title}
+              price={product.price}
+              imageUrl={product.imageUrl}
+              description={product.description}
+              productId={product._id}
+              isLoggedIn={isLoggedIn}
+              isAdmin={isAdmin}
+              AddToCart={AddToCart}
+              deleteProduct={deleteProduct}
+              category = {product.category}
+              key={product._id}
+            />
+          )
+        )
+      )}
+    </>
   );
 }
 export default Home;

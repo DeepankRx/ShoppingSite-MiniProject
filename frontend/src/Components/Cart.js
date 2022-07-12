@@ -68,9 +68,11 @@ function Cart() {
                     <td>{i + 1}</td>
                     <td>
                       <img
-                        src={
-                          require(`../uploads/${item.imageUrl}`)
-                        }
+                        style={{
+                          width: "75px",
+                          height: "75px",
+                        }}
+                        src={require(`../uploads/${item.imageUrl}`)}
                       ></img>
                     </td>
                     <td>{item.title}</td>
@@ -110,6 +112,25 @@ function Cart() {
             </table>
             <div>
               <h3>Total: ₹{total} </h3>
+            </div>
+            <div
+            style={
+              {
+                display: "flex",
+                justifyContent: "right",
+                alignItems: "center",
+                marginRight:"85px"
+              }
+            }
+            >
+            <button
+            className="btn btn-success"
+            style={{
+              "padding":"15px",
+              "fontSize":"20px",
+              "marginBottom":"5px"
+            }}
+            >Checkout</button>
             </div>
           </div>
         </div>

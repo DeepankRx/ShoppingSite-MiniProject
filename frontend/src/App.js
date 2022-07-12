@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import AddProduct from "./Components/AddProduct";
 import Home from "./Components/Home";
 import Footer from "./Components/Footer";
-import SingleProduct from "./Components/SingleProduct";
+import SingleProduct from './Components/SingleProduct/SingleProduct';
 import UpdateProduct from "./Components/UpdateProduct";
 import PageNotFound from "./Components/PageNotFound";
 import Cart from "./Components/Cart";

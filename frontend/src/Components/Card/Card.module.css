@@ -4,12 +4,13 @@
   height: 80vh;
   justify-content: center;
   align-items: center;
-  display: flex;
+  display: inline-flex;
+  width: 33%;
 }
 
 .card {
   width: 300px;
-  height: 440px;
+  /* height: 440px; */
   border-radius: 5px;
   box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
 }
@@ -52,13 +53,21 @@
 
 .btnGroup .btn a {
   padding: 5px 15px;
+  border: 1.5px solid #007bff;
+  border-radius: 3px;
+  text-decoration: none;
+  color: #007bff;
+  width: auto;
+}
+
+.button
+{
+   padding: 5px 15px;
   background-color: #28a745;
   color: #fff;
+  width:max-content;
   border-radius: 3px;
   margin-left: -2px;
-}
-.btnGroup a {
-  margin: 0 10px;
-  text-decoration: none;
-  color: #000;
+  font-size: 1.2em;
+  border-color: #007bff;
 }
