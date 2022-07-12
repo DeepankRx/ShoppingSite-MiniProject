@@ -6,9 +6,26 @@ function Cart() {
   const [products, setProducts] = useState([]);
   const [click, setClick] = useState(1);
 
+  const checkOut = () => {
+    axios
+      .post(
+        "http://localhost:5000/api/shop/placeOrder",
+        {
+          products: cartItem.products,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        alert("Order Placed Successfully");
+        window.location.reload();
+      })
+      .catch((err) => console.log(err.response.data));
+  };
   useEffect(() => {
-    async function fetchCart() {
-      await axios
+    function fetchCart() {
+      axios
         .get("http://localhost:5000/api/shop/getCart", {
           withCredentials: true,
         })
@@ -18,7 +35,9 @@ function Cart() {
           fetchProducts(res.data.products);
         })
         .catch((err) => {
-          console.log(err);
+          setCartItem([]);
+          setProducts([]);
+          console.log(err.response.data);
         });
     }
     fetchCart();
@@ -113,31 +132,58 @@ function Cart() {
             <div>
               <h3>Total: ₹{total} </h3>
             </div>
-            <div
-            style={
-              {
-                display: "flex",
-                justifyContent: "right",
-                alignItems: "center",
-                marginRight:"85px"
-              }
-            }
-            >
-            <button
-            className="btn btn-success"
-            style={{
-              "padding":"15px",
-              "fontSize":"20px",
-              "marginBottom":"5px"
-            }}
-            >Checkout</button>
-            </div>
+            {products.length > 0 && (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "right",
+                  alignItems: "center",
+                  marginRight: "85px",
+                }}
+              >
+                <button
+                  className="btn btn-success"
+                  onClick={checkOut}
+                  style={{
+                    padding: "15px",
+                    fontSize: "20px",
+                    marginBottom: "5px",
+                  }}
+                >
+                  Checkout
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
     );
   } else {
-    <Navigate to="/cart"></Navigate>;
+    return (
+      <div
+        style={{
+          display: "flex",
+          // justifyContent:"center",
+          // alignContent:"center",
+          flexDirection: "column",
+        }}
+      >
+        <h2
+          style={{
+            alignSelf: "center",
+          }}
+        >
+          Your Cart Is Empty
+        </h2>
+        <h3
+          style={{
+            alignSelf: "center",
+          }}
+        >
+          Please Order Something
+        </h3>
+      </div>
+    );
   }
 }
 export default Cart;

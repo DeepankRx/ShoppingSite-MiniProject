@@ -31,21 +31,19 @@ exports.loginUser = async (req, res) => {
   User.findOne({ email: email }).then((user) => {
     if (user) {
       bcrypt
-      .compare(password, user.password)
-      .then((result) => {
-        console.log(user._id, user.isAdmin);
-        req.session.isLoggedIn = true;
-        req.session.userId = user._id;
-        req.session.isAdmin = user.isAdmin;
-        console.log(req.session);
-          res.json(
-            {
-              message: "Login successfully!",
-              loggedIn: true,
-              isAdmin: user.isAdmin,
-              userId: user._id,
-            }
-          );
+        .compare(password, user.password)
+        .then((result) => {
+          console.log(user._id, user.isAdmin);
+          req.session.isLoggedIn = true;
+          req.session.userId = user._id;
+          req.session.isAdmin = user.isAdmin;
+          console.log(req.session);
+          res.json({
+            message: "Login successfully!",
+            loggedIn: true,
+            isAdmin: user.isAdmin,
+            userId: user._id,
+          });
         })
         .catch((err) => {
           console.log(err);
@@ -84,4 +82,4 @@ exports.logoutUser = (req, res) => {
       });
     }
   });
-}
+};

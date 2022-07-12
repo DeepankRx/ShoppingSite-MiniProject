@@ -18,6 +18,7 @@ function Login() {
     agent.Auth.login(email, password)
       .then((response) => {
         a.setIsLoggedIn(true);
+        localStorage.setItem("userId",response.data.userId);
         console.log(response.data);
         a.setIsAdmin(response.data.isAdmin);
         Navigate("/");

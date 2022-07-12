@@ -1,13 +1,13 @@
 const Product = require("../Model/product");
 const multer = require("multer");
-const path = require("path");  
+const path = require("path");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, __dirname + "../../../frontend/src/uploads");
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
-  }, 
+  },
 });
 const upload = multer({
   storage: storage,
@@ -15,7 +15,6 @@ const upload = multer({
     fileSize: 1000000,
   },
 }).single("image");
-
 
 exports.postAddProduct = async (req, res, next) => {
   //upload image
@@ -32,7 +31,7 @@ exports.postAddProduct = async (req, res, next) => {
     const imageUrl = req.file.filename;
     const price = req.body.price;
     const description = req.body.description;
-    const category = req.body.category; 
+    const category = req.body.category;
     const product = new Product({
       title: title,
       imageUrl: imageUrl,

@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import AddProduct from "./Components/AddProduct";
 import Home from "./Components/Home";
 import Footer from "./Components/Footer";
-import SingleProduct from './Components/SingleProduct/SingleProduct';
+import SingleProduct from "./Components/SingleProduct/SingleProduct";
 import UpdateProduct from "./Components/UpdateProduct";
 import PageNotFound from "./Components/PageNotFound";
 import Cart from "./Components/Cart";
@@ -13,6 +13,7 @@ import Login from "./Components/Login";
 import agent from "./agent";
 import { useEffect, useState, useContext } from "react";
 import SessionState from "./Context/SessionDetails/SessionState";
+import OrderHistory from "./Components/OrderHistory";
 function App() {
   const a = useContext(SessionState);
 
@@ -24,8 +25,7 @@ function App() {
       setIsAdmin(response.data.isAdmin);
       a.setIsAdmin(response.data.isAdmin);
       a.setIsLoggedIn(response.data.loggedIn);
-    }
-    );
+    });
   }, []);
 
   return (
@@ -84,7 +84,14 @@ function App() {
                   isLoggedIn === true ? <Navigate to="/"></Navigate> : <Login />
                 }
               />
-
+              <Route
+                path="/orderHistory"
+                element={
+                     (
+                    <OrderHistory />
+                  )
+                }
+              />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
             <Footer />
