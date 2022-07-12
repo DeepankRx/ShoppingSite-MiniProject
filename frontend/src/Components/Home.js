@@ -1,9 +1,7 @@
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import SessionContext from "../Context/SessionDetails/SessionContext";
-import agent from "../agent";
 import Card from "../Components/Card/Card";
-import styles from "../CSS/Card.module.css";
 function Home() {
   const [products, setProducts] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
