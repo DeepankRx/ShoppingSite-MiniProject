@@ -1,4 +1,4 @@
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import SessionContext from "../Context/SessionDetails/SessionContext";
 import agent from "../agent";
@@ -18,7 +18,7 @@ function Login() {
     agent.Auth.login(email, password)
       .then((response) => {
         a.setIsLoggedIn(true);
-        localStorage.setItem("userId",response.data.userId);
+        localStorage.setItem("userId", response.data.userId);
         console.log(response.data);
         a.setIsAdmin(response.data.isAdmin);
         Navigate("/");

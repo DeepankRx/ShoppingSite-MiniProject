@@ -1,8 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 function OrderHistory() {
-    let date,time;
-    console.log("In Order histoyry")
   const [orderedItems, setOrderedItems] = useState([]);
   useEffect(() => {
     axios
@@ -10,7 +8,7 @@ function OrderHistory() {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res.data.products)
+        console.log(res.data.products);
         setOrderedItems(res.data.products);
       })
       .catch((err) => {
@@ -19,14 +17,21 @@ function OrderHistory() {
   }, []);
   if (orderedItems) {
     let total = 0;
-    orderedItems.map((product) => {
-      total += product.price * product.quantity;
+    orderedItems.map((item) => {
+      total += item.price * item.quantity;
     });
     return (
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            <h1>OrderHistory</h1>
+            <h1
+              style={{
+                "text-align": "center",
+                "font-size": "400%",
+              }}
+            >
+              Order History
+            </h1>
             <table className="table">
               <thead>
                 <tr>
@@ -38,11 +43,11 @@ function OrderHistory() {
                   <th>Total</th>
                   <th>Date Of Order</th>
                   <th>Time Of Order</th>
+                  <th>Order Status</th>
                 </tr>
               </thead>
               <tbody>
                 {orderedItems.map((item, i = 0) => (
-                  
                   <tr key={item._id}>
                     <td>{i + 1}</td>
                     <td>
@@ -58,9 +63,23 @@ function OrderHistory() {
                     <td>{item.price}</td>
                     <td>{item.quantity}</td>
                     <td>{item.quantity * item.price}</td>
-                    <td>{new Date(item.dateOfOrder).toLocaleDateString().split("/").join("-")
-                    }</td>
+                    <td>
+                      {new Date(item.dateOfOrder)
+                        .toLocaleDateString()
+                        .split("/")
+                        .join("-")}
+                    </td>
                     <td>{new Date(item.dateOfOrder).toLocaleTimeString()}</td>
+                    <td>
+                      <button
+                        onClick={() => {
+                          alert("Your order has been shipped");
+                        }}
+                        className="btn btn-primary"
+                      >
+                        Order Status
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>

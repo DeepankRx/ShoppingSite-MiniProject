@@ -6,7 +6,7 @@ import Home from "./Components/Home";
 import Footer from "./Components/Footer";
 import SingleProduct from "./Components/SingleProduct/SingleProduct";
 import UpdateProduct from "./Components/UpdateProduct";
-import PageNotFound from "./Components/PageNotFound";
+import PageNotFound from "./Components/404/PageNotFound";
 import Cart from "./Components/Cart";
 import SignUp from "./Components/SignUp";
 import Login from "./Components/Login";
@@ -84,14 +84,7 @@ function App() {
                   isLoggedIn === true ? <Navigate to="/"></Navigate> : <Login />
                 }
               />
-              <Route
-                path="/orderHistory"
-                element={
-                     (
-                    <OrderHistory />
-                  )
-                }
-              />
+              <Route path="/orderHistory" element={<OrderHistory />} />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
             <Footer />

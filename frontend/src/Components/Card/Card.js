@@ -1,7 +1,9 @@
 import styles from "./Card.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useState } from "react";
 function Card(props) {
+  const [quantity, setQuantity] = useState(1);
   const onDoubleClick = () => {
     window.location.reload();
   };
@@ -21,12 +23,34 @@ function Card(props) {
               <h4>{props.title}</h4>
               <h3>{props.price} Rs.</h3>
             </div>
-            {
-              (!props.doNotDisplay) &&
-            <div className={styles.viewBtn}>
-              <Link to={"/product/" + props.productId}>View Details</Link>
+            {!props.doNotDisplay && (
+              <div className={styles.viewBtn}>
+                <Link to={"/product/" + props.productId}>View Details</Link>
+              </div>
+            )}
+            {/* create a counter for the quantity
+             */}
+            <div className={styles.counter}>
+              <div className={styles.counterBtn}>
+                <button
+                  onClick={() => {
+                    if (quantity > 1) {
+                      setQuantity(quantity - 1);
+                    }
+                  }}
+                >
+                  -
+                </button>
+                <span>{quantity}</span>
+                <button
+                  onClick={() => {
+                    setQuantity(quantity + 1);
+                  }}
+                >
+                  +
+                </button>
+              </div>
             </div>
-            }
           </div>
           <hr />
           <h3
@@ -47,7 +71,7 @@ function Card(props) {
               {props.isLoggedIn && (
                 <button
                   className={styles.button}
-                  onClick={() => props.AddToCart(props.productId)}
+                  onClick={() => props.AddToCart(props.productId, quantity)}
                   onDoubleClick={onDoubleClick}
                 >
                   <i className="fa fa-cart-plus" aria-hidden="true">
@@ -56,7 +80,7 @@ function Card(props) {
                   </i>
                 </button>
               )}
-              {(!props.doNotDisplay && !props.isLoggedIn) && (
+              {!props.doNotDisplay && !props.isLoggedIn && (
                 <Link to="/login" onDoubleClick={onDoubleClick}>
                   {" "}
                   <i className="fa fa-cart-plus" aria-hidden="true">

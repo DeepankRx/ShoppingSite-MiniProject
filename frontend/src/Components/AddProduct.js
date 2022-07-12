@@ -11,38 +11,35 @@ function AddProduct() {
     e.preventDefault();
     //if image is uploaded
     if (image.data) {
-      
-    axios
-      .post(
-        backendUrl,
-        {
-          title: title,
-          image: image.data,
-          price: price,
-          description: description,
-          category: category,
-        },
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
+      axios
+        .post(
+          backendUrl,
+          {
+            title: title,
+            image: image.data,
+            price: price,
+            description: description,
+            category: category,
           },
-          withCredentials: true,
-        }
-      )
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    setImage({ preview: "", data: "" });
-    setTitle("");
-    setPrice("");
-    setDescription("");
-    setCategory("");
-    }
-    else
-    {
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+            withCredentials: true,
+          }
+        )
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      setImage({ preview: "", data: "" });
+      setTitle("");
+      setPrice("");
+      setDescription("");
+      setCategory("");
+    } else {
       alert("Image already uploaded");
     }
   };

@@ -15,13 +15,13 @@ function Home() {
     setIsAdmin(a.isAdmin);
   }, [a]);
 
-  const AddToCart = (productId) => {
+  const AddToCart = (productId, quantity) => {
     axios
       .post(
         `http://localhost:5000/api/shop/cart/`,
         {
           productId: productId,
-          quantity: 1,
+          quantity: quantity,
         },
         {
           withCredentials: true,
@@ -73,23 +73,20 @@ function Home() {
           marginBottom: "50px",
           fontSize: "50px",
           textDecoration: "underline",
-          
         }}
       >
         Welcome to the{" "}
-        <span 
+        <span
           style={{
-            color:"red",
+            color: "red",
             fontSize: "50px",
             fontWeight: "bold",
           }}
-
         >
           <strong>
             <i>Thrift Shop</i>
           </strong>
         </span>
-
       </h1>
       {products.map(
         (product, i = 0) => (
@@ -105,7 +102,7 @@ function Home() {
               isAdmin={isAdmin}
               AddToCart={AddToCart}
               deleteProduct={deleteProduct}
-              category = {product.category}
+              category={product.category}
               key={product._id}
             />
           )

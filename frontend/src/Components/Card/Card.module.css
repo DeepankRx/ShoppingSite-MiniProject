@@ -60,12 +60,11 @@
   width: auto;
 }
 
-.button
-{
-   padding: 5px 15px;
+.button {
+  padding: 5px 15px;
   background-color: #28a745;
   color: #fff;
-  width:max-content;
+  width: max-content;
   border-radius: 3px;
   margin-left: -2px;
   font-size: 1.2em;

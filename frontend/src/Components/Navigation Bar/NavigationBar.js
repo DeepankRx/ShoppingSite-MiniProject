@@ -12,7 +12,7 @@ function NavigationBar() {
   const [isAdmin, setIsAdmin] = useState(false);
   const onDoubleClick = () => {
     window.location.reload();
-  }
+  };
   useEffect(() => {
     setIsLoggedIn(a.isLoggedIn);
     setIsAdmin(a.isAdmin);
@@ -49,23 +49,30 @@ function NavigationBar() {
                 </Link>
               </li>
             ) : null}
+            <li className={styles.li}>
+              <Link className={styles.a} to="/orderHistory">
+                Order History
+              </Link>
+            </li>
 
             {isLoggedIn === true ? (
               <li className={styles.li}>
-                <Link className={styles.a} 
-                onDoubleClick={onDoubleClick}
-                to="/cart">
-                  <i
+                <Link
+                  className={styles.a}
+                  onDoubleClick={onDoubleClick}
+                  to="/cart"
+                >
+                  {/* <i
                     className="fa fa-shopping-cart"
                     style={{
                       fontSize: "2rem",
                     }}
                     aria-hidden="true"
-                  ></i>
+                  ></i> */}
+                  Cart
                 </Link>
               </li>
             ) : null}
-            <li></li>
           </ul>
           {isLoggedIn === true ? (
             <li className={styles.li}>
@@ -77,22 +84,25 @@ function NavigationBar() {
                   }}
                   aria-hidden="true"
                   title="Logout"
-                  onClick={() => logOut()
-                  }
+                  onClick={() => logOut()}
                   onDoubleClick={onDoubleClick}
                 ></i>
               </Link>
             </li>
           ) : (
             <>
-              <Link className={styles.a} 
-              onDoubleClick={onDoubleClick}
-              to="/login">
+              <Link
+                className={styles.a}
+                onDoubleClick={onDoubleClick}
+                to="/login"
+              >
                 <button className={styles.button}>Login</button>
               </Link>
-              <Link 
-              onDoubleClick={onDoubleClick}
-              className={styles.a} to="/signup">
+              <Link
+                onDoubleClick={onDoubleClick}
+                className={styles.a}
+                to="/signup"
+              >
                 <button
                   className={classnames(styles.signup_button, styles.button)}
                 >

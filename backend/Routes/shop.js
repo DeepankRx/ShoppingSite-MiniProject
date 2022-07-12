@@ -7,8 +7,8 @@ const cartController = require("../Controller/cart");
 const router = express.Router();
 
 router.post("/delete-from-cart", cartController.deleteFromCart);
-router.post("/placeOrder",cartController.placeOrder);
-router.get("/orderHistory",cartController.getOrderHistory);
+router.post("/placeOrder", cartController.placeOrder);
+router.get("/orderHistory", cartController.getOrderHistory);
 router.get("/getCart", cartController.getCart);
 router.get("/all-products", productsController.getProducts);
 router.post("/cart", cartController.postCart);

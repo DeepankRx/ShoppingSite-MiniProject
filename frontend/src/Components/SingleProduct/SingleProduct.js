@@ -47,8 +47,8 @@ function SingleProduct() {
             fontSize: "50px",
             fontWeight: "200",
             color: "black",
-            fontFamily:"cursive",
-            textDecoration:"underline"
+            fontFamily: "cursive",
+            textDecoration: "underline",
           }}
         >
           Product Details
@@ -89,8 +89,8 @@ function SingleProduct() {
             fontSize: "50px",
             fontWeight: "200",
             color: "black",
-            fontFamily:"cursive",
-            textDecoration:"underline"
+            fontFamily: "cursive",
+            textDecoration: "underline",
           }}
         >
           Similar Products
